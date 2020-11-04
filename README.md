@@ -1,2 +1,4 @@
 # linux-
-bash scripting 
+
+
+bash scripting essentials
