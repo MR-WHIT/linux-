@@ -1,0 +1,217 @@
+		shell scripting
+	especially for automation
+	end with extension .sh (bashfile)--> shell scripting
+	like windows with extension .bat (batch file)--> batch programming 
+	
+	types of shell
+		bash --> bourne again shell
+		sh --> shell
+		zsh-->extended bourne shell
+		ksh --> korn shell
+		csh --> c shell
+		
+	commands
+		internal command -->builtin command like cd,ls 
+		external commands --> like nmap,metasploit
+	
+		
+	variables 
+		userdefined
+		system defined --> environmental variabes (env)
+		export use to set env
+		unset to delete env
+		declare to set defined variable
+	
+		alias to short the  command	
+	escaping
+		escape sequence to escape character (\,/,etc..,)
+		exit status --> echo $?
+		
+	boolean operator
+	
+		&& --> and
+		|| --> or
+		; --> not check 1st comand run 2nd comand 
+		[10>5] --> test case
+			
+	seebank
+		binary location  
+		#!/usr/bin/bash
+		
+	       . --> means current directory
+	       
+	  get user input
+	  	read -p "enter your input:" ________
+	  	read -t --> time consumption 
+	  	-s hidden for (password)
+	  	echo -ne "enter the input"
+	  	arguents $#-->values $0--> file $@--> copy and echoed
+-----------------------------------------
+
+	if condition
+	    start with (if) and end with (fi)
+		a=2
+		b=3
+		if[$a =$b]
+		then
+			echo "a is greate"
+		else
+			echo "b is great"
+			
+	fi
+	
+	
+	--elif condition--
+	--nestedif condition----
+	
+	if comparision
+	
+	numeric --> -gt -lt  -ge -le
+	
+	string compare
+		= =/ (-z)--> null comparison
+	file compare
+		-b=>block -c=>char -d=>dir -f=>file
+	 [-f filename] && echo "is this a file" || echo "no"
+	 
+=========================================
+
+cases statement:
+
+	case expression in 
+		pattern)
+		  statement;;
+	esac
+	
+	
+
+my example:#! /usr/bin/bash
+
+        read -p  "enter the animal name:" animal
+        #read animal
+        case $animal in 
+                dog)
+                   echo "domestic animal";
+                lion)
+                     echo "wild animal";;
+              
+                     echo "none of these";;
+        esac
+        
+=======================================
+loop condition
+
+	for loop
+	while loop
+	do while
+	----------------------
+	for i in 1 2 3 4 5 6
+	do
+	 echo $i
+	done
+
+    while loop--> when run in true
+    -------------------------
+    	i=5
+    	  while [$i -lt 10]
+    	  do 
+    	    echo $((i++))
+    	    exit
+    	  done
+    	  
+    until loop --> only when execute false
+      i=1
+      until [$i -lt 10]
+      do 
+      echo "true"
+      done	
+      
+      select loop --> seletion options
+----------------------------------------
+         select tool in hydra hashcat john
+         
+         do 
+         case $tool in 
+              "hydra")
+                echo nmap localhost;;
+               "hashcat")
+                 echo hashcat;;
+                 "john")
+                 echo john --help;;
+         esac
+         done     
+         
+         
+         
+---------------------------------------
+ 		awk scripting
+
+
+	awk--> aho wienwerg kerningen
+
+	used for formating,operation,etc../
+	
+
+	process line by line all re (records)
+		field spaced[ name age gender]
+	awk options ' criteria {action}'--> basic syntax
+	mainly used for reporting and data transportation
+	
+
+	constructs
+	loops
+
+	pattern $1-- 1st field $2 -- 2nd field
+	
+		string matching
+		awk '/^t/ {print $1}' filename
+		
+
+	builtin variables
+		NR ---> no of records
+		awk '/admin/ {print NR}' filename
+		NF --> field number
+		OFS --> output field seprator(single space)
+		awk 'OFS="|" {print $1}' file name
+		ORS --> output record sepration	
+		awk 'ORS="+" {print $1}' file name
+		FS --> fied separator ()
+		awk 'FS="="{print $1 }' file name
+		awk -F'=' '{print $1}' file name
+
+	variables
+	we dont specifice $variables like shell script
+		awk 'var=1 {print $1}' file name
+	
+	comparision
+
+		arthimetic 
+			awk '$field > 10 {print $1 }' file name
+
+	
+ 	arrays 
+
+		ENVIRON awk '{print ENVRION["HOME"]}'
+	section
+		begin --> process executed from begining
+			awk 'BEGIN{print"begin"}{print $field}'
+		end
+			awk '{print $field } {print $1}END{print"ending"}'
+	builtin command
+		print $1,length($1)
+		printf "%s %s\n",
+	control flow loop
+		if 
+    			if expression
+		{if ($1 > 10) print $1}			
+		while
+			{while ($1 > 20)print $1}
+	
+----------------------------------------------------------
+
+	awk file extension
+		awk -f file.awk
+	-----------------------
+		nawk --> newwer awk
+		gawk --> graphical awk
+		
