@@ -2,5 +2,6 @@
 
 
 bash scripting essentials
+awk scripting essentials
 
-[it contains some spelling mistaes .]
+
