@@ -1,0 +1,106 @@
+		linux filesystem
+
+
+	/--> is the top most directory 
+		/
+├── bin -> usr/bin
+├── boot
+├── dev
+├── etc
+├── home
+├── initrd.img -> boot/initrd.img-5.7.0-kali1-amd64
+├── initrd.img.old -> boot/initrd.img-5.7.0-kali1-amd64
+├── lib -> usr/lib
+├── lib32 -> usr/lib32
+├── lib64 -> usr/lib64
+├── libx32 -> usr/libx32
+├── lost+found
+├── media
+├── mnt
+├── opt
+├── proc
+├── root
+├── run
+├── sbin -> usr/sbin
+├── srv
+├── sys
+├── tmp
+├── usr
+├── var
+├── vmlinuz -> boot/vmlinuz-5.7.0-kali1-amd64
+└── vmlinuz.old -> boot/vmlinuz-5.7.0-kali1-amd64
+
+22 directories, 4 files
+
+
+	/
+	|
+	|
+	 -->/bin 
+		 directory that contains binaries
+		essential user command binaries(bash,cat,cd,ls...,)
+	--->/boot 
+		 directory contains files required for starting your system
+	--->/dev
+		directory contains device files
+		Many of these are generated at boot time 
+		device files include /dev/null(used to avoid errors)
+        --->/etc
+		the files that contain the name of your system
+		the users and their passwords
+		the names of machines on your network and when and where the 
+	        partitions on your hard disks should be mountd
+		configuration files for the system
+			crontab,cups,hosts,passwd,shells,hostname,etc..,	
+	-->/home
+		users personal directories
+	 -->/usr
+		read-only user application data and directories
+		/usr/bin
+		/usr/include
+		/usr/lib
+		/usr/local
+		/uisr/share
+	-->/lib
+		contains Libraries are files containing code that your applications can use
+	-->/media
+		external storage will be automatically mounted when you plug it in and try to access it
+	-->/mnt
+		contains backup you would manually mount storage devices or partitions
+	-->/opt 
+		directory is often where software you compile (that is, you build yourself from source code 
+		do not install from your distribution
+	-->/proc
+		virtual directory containsinformation about your computer such as information about your 
+		CPU and the kernel your Linux system is running process 
+		related files
+	-->/root
+		home directory for superuser (administartor)
+	-->/run
+		  it contains System processes use it to store temporary data 
+	-->/sbin
+		it contains super user binary files like bin directory.
+        	essential system binaries
+			fdisk,fsck,halt,reboot
+	-->/srv
+		directory contains data for servers
+		If you are running a web server from your Linux your HTML files for your sites would go into  
+		/srv/http (or /srv/www)
+	-->/sys
+		/sys is another virtual directory like /proc and /dev 
+		also contains information from devices connected to your computer
+	-->/tmp
+		contains temporary files, usually placed there by applications that you are running
+		tmp is one of the few directories hanging off / that you can actually interact 
+		with without becoming superuser
+  	-->/var
+		contains things like logs in the /var/log subdirectories
+		/var/cache--> application cache data
+		/var/lib --> data modified as programmers run
+		/var/lock --> lock files to track resources in use
+		/var/opt--> visible data for installed packages
+		/var/spool --> tasks waiting to be processed
+		/var/tmp --> temporaary file saved b/w reboots
+		
+
+
