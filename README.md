@@ -1,10 +1,3 @@
-# linux-
-linux file system
+# linux
 
-
-bash scripting essentials
-
-
-awk scripting essentials
-
-
+ABOUT LINUX 
