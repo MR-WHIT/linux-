@@ -1,0 +1,553 @@
+		linux 
+
+		linux kernal was developed by Linus Torvalds.
+
+	linux system 
+			1.hardware--> this includes all hardware that system runs as cpu,disk,memory etc.,
+			2.linux kernal
+				--->kernal is core of os it manages harware interact with system.
+			3.user space
+				--> users interact ith system.
+
+
+
+		In  linux every thing is a file.
+
+        |-------------------|
+        |      HARDWARE		|
+        |		  ^         |
+        |         |         |
+        |         v         |
+        |	    KERNAL		|
+        |		  ^         |
+        |		  |         |
+        |         v         |
+        |		SHELL		|
+        |         ^         |
+        |         |         |
+        |         v         |
+        |	 APPLICATION    |
+        |     (SOFTWARE)	|
+        |___________________|
+
+	stdout(standard output)
+		>(output redirection or stream)
+	stdin(standard input)
+		<(input redirection )
+	stderr(errors)
+		2>(standard error)
+
+	pipe
+		allow us to get stdout of process anad getout to stdin of another process.
+		ls -la | cat
+	tee
+		like cat command
+	env(environment)
+		env--> environment variables
+		use $ to specify the env. eg: $PATH
+	cut 
+		extract portion of text from a file.
+			cut [options] filename
+			cut -c line bu line
+			cut -f field
+			cut -d delimeter
+			cut -c 1 -d "|" filename
+	paste
+			like cat command 
+			paste -s -->go line by line 
+			paste -d delimiter
+			paste -d ' ' -s filename
+	head
+		specify first line in output
+		head -n 10(no.) filename
+
+	tail 
+		specify first line in output
+		tail -n 10(no.) filename
+		tail -f follow line 
+		eg: tail -f /var/log/syslog
+	expand 
+		change TABS to spaces
+	unexpand (opposite)
+	join 
+		allow to join multiple files 
+	split 
+		split lines
+
+	sort 
+		useful for sorting lines.
+		sort -r  filename--> recursively
+		sort -n numeric sort
+	tr
+		allows to translate set of character into another set of characters.
+		tr a-z A-Z lowercase to uppercase.
+	uniq 
+		useful for parsing text
+		removes duplicates
+		uniq -c --> count of words present how many times.
+		uniq -d --> get duplicates
+	wc 
+		word count in lines/sentences.
+		wc -l -w -c -c 
+	nl 
+		find number of lines 
+
+--------------------------------
+
+	regular expressions
+
+		useful for patterb based selection
+		universal with programming languages.
+		^--begin of a line
+		$--end of line
+		.--match any single character
+		[]--specify character within bracket eg: d[iou]g
+		would match : dig dog dug
+		d[^i]g match: dug dog not dig--except the character
+		[a-c]--range of charater
+		d[A-C]g--case sensitive--will match dAg not dag
+
+-------------------------------
+
+users and groups
+
+	system users id UID -->
+		users id dtart from 1000
+		root is 0   
+		manages users usrname
+	group id GID-->
+		manages users from group
+		set of users with permissions
+
+	ROOT is the most important user in the linux system.
+    su --> substitute users
+    /etc/sudoers --> file in which users has sudo access
+
+   /etc/passwd
+   		show the list of users and detailed informtion about them.
+   		root:x:0:0:root:/root:/bin/bash
+   	/etc/shadow 
+   		user password is stored in the file
+
+   If a user doesn't have login access it is  denoted in /etc/passwd as "*"
+    If a user doesn't have password it is  denoted in /etc/passwd as " "(blank)
+    If a user password is stored in the /etc/shadow file it is  denoted in /etc/passwd as "X"
+
+    useradd name
+    	add user
+    userdel name
+    	delete user
+    passwd name
+    	change password
+------------------------------
+
+Permissions 
+
+		r-read
+		w-write
+		x-execute
+		-  empty
+	
+	modify permissions 
+
+		chmod means change mode
+		chmod a+ --> add permission
+		chmod a- --> delete permission
+			4-read only
+			2-write only
+			1-execute only
+			3-write+execute
+			5-read + execute
+			6-read +write
+			7-read_write+exexute
+      	d | rwx | r-x | r-x 
+     	d-directory
+     	rwx --permission for user
+     	xr--permision for group
+     	x-everyone 
+
+
+     	chmod 777 filename
+
+     		1 no.7 --> user permission 
+     		2 no.7 --> group
+     		3 no.7 --> everyone(other)
+
+
+     Modify user ownership
+     		sudo chown user myfile
+
+     Modify group ownership
+     	sudo chgrp group myfile							
+     both user and group	
+	    sudo chown user:group myfile		
+
+umask --> change default set of permissions 
+		umask 022 user access not group and other access
+
+setuid --> set user id 
+	allows user to run a program as owner 
+	$ ls -l /usr/bin/passwd
+    -rwsr-xr-x 1 root root
+    	where s represents suid 
+
+    Symbolic way:sudo chmod u+s myfile
+	Numerical way:sudo chmod 4(s)755 myfile
+
+segid --> set group id 
+	-rwxr-sr-x
+	sudo chmod g+s myfile
+	sudo chmod 2555 myfile
+
+UID s
+
+	effective user id -- grant access rights to a process.
+	real user id --user that launches the process
+	saved user id --allow process between the effective uid and real uid
+
+sticky bits 
+	
+	This permission bit, "sticks a file/directory" this means that only the owner or the root user can delete or modify the file.
+	 in this 1 represents sticky bits.
+	sudo chmod +t filename
+	sudo chmod 1755 filename
+-------------------------------
+
+process 
+
+	program that are running in your machine.
+	managed by kernal and each process has it id called PID.
+		init is parrent of all process.
+
+   PID        TTY     STAT   TIME          CMD
+
+   41230    pts/4    Ss        00:00:00     bash
+
+   51224    pts/4    R+        00:00:00     ps
+
+   		ps --> process
+   	where PID   -process id 
+   		  TTY   - controlling terminal
+   		  STAT  - process staus 
+   		  CMD   - name of command 
+   		  TIME  - cpu usage time
+
+   	ps aux
+
+   		a-all running process
+   		u-details about process
+   		x-list all process
+
+   	top,htop command shows process
+   	
+process creation 
+
+					init is the parrent of all ps.
+		fork-->clone process itself
+		exec-->replaces current process with new process
+		wait-->parent ps wait child process executed 
+		exit--> exit from ps
+
+   		new process created,an
+   		 existing process clone itself called fork system call.
+   		ps l  --long format about process
+
+   			 The fork system call creates a mostly identical child process, this child process takes on a new process ID (PID) and the original process becomes its parent process and has something called a parent process ID PPID.
+
+   			 F   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
+4  1000    1145    1060  20   0 164088  5300 -      Ssl+ tty2       0:00 /usr/li
+4  1000    1147    1145  20   0 566956 61144 -      Sl+  tty2       0:30 /usr/li
+0  1000    1185    1145  20   0 268796 12980 -      Sl+  tty2       0:00 /usr/li
+0  1000    2910    2901  20   0   8148  4904 -      Ss   pts/0      0:00 bash
+0  1000    2913    2910  20   0   9492  3156 -      R+   pts/0      0:00 ps l
+		
+		init
+		    when the system boots up the kernal creates process called init.it has PID 1
+		The init process can't be terminated unless the system shuts down. It runs with root privileges and runs many processes that keep the system running. it is the process that spawns all other processes.
+
+process state
+
+		ready
+		running
+		waiting
+		terminated
+jobs control
+	sleep 100 &
+			where & denotes background 
+
+
+	jobs --> to view bg jobs
+		fg %1--> moves bg processs from fg(foreground)
+		kill %1 id --> kill jobs with id 
+	nohup
+
+priority process (PR) 
+	-19 to 20
+	-19 --> high priority
+	20 --> low priority
+
+kill
+
+	it has may signals some are
+
+		sighup-->hangup
+		sigint--> interupt signal
+		sigterm-->kill process but allow it to do some cleanup first
+		sigkill--> kill process 
+		sigstop-->stop /suspend the process
+
+-------------------------------
+
+devices
+
+		/dev directory
+
+			device files are stored in the directory.
+            it contains device drivers through device files or devices nodes to interact with a device connect to machine.
+        device types
+
+        	ls -l /dev
+
+            brw-rw----   1 root disk      8,   0 Dec 20 20:13 sda
+
+            crw-rw-rw-   1 root root      1,   3 Dec 20 20:13 null
+
+            srw-rw-rw-   1 root root           0 Dec 20 20:13 log
+
+            prw-r--r--   1 root root           0 Dec 20 20:13 fdata
+
+
+             	c - character
+                b - block
+                p - pipe
+                s - socket
+
+                	character devices --> transfer data one a character at a time
+                	block devices-->data transfer in large fixed-sized blocks
+                	pipe device-->named pipes allow 2 or more process to communicate with each other
+					socket device-->communicate with many ps.
+
+
+	devices names
+
+		SCSI devices(SCSI[Small Computer System Interface], it is a protocol used for allow communication between disks, printers, scanners and other peripherals to your system)
+			/dev/sda --1 hard disk
+			/dev/sdb --> 2 hard disk
+			/dev/sda3--> 3 partion of 1 hard disk
+		pseudo devices(not connect to system via physically [character devices])
+			/dev/zero -->accepts and discard all input produces a stream of null(0 bytes)
+			/dev/null --> accepts and discard with no output
+			/dev/random--> produces random no.
+		PATA devices
+			/dev/hda --> 1 hardisk
+			/dev/hdd2--> 2 partion on 4th hard disk
+	sysfs
+
+		/sys directory
+
+			it is like dev directory
+			show detailed information on devices 
+	lsusb-->list usb devices
+	lspci--> listing pci devices
+	lsscsi--> listing SCSI devices
+    dd command --> useful for conver and copy data.read i/p from file and writes it to a file.
+    	
+    	 dd if=/home/user/backup.img of=/dev/sdb bs=1024(K M G) count=2
+
+    	 	if-->input file
+    	 	of-->output file
+    	 	bs-->bytes
+    	 	count-->no.of blocks to copy
+-------------------------------
+ file system 
+
+ 	ext4--> native file system
+ 	btrfs--> better or buffer FS
+ 	XFS --> high performance journaling FS
+ 	NTFS--> new trchnology FS(windows)
+ 	HFS+ --> macintosh FS
+
+DISk
+	 HD divided into partions
+	 		/dev/sda1
+	 		/dev/sda2
+partition table
+
+		MBR(master boot record)
+		GPT(GUID partition table)
+
+file system structure
+
+		boot block-->info to boot the os
+		super block-->info about filesystem
+		inode table-->info about file
+		data block--> info about actual data in files and directory
+
+
+ 	fdisk - basic command-line partitioning tool, it does not support GPT
+	parted - this is a command line tool that supports both MBR and GPT partitioning
+	gparted - this is the GUI version of parted
+	gdisk - fdisk, but it does not support MBR only GPT
+-------------------------------
+
+BOOT PROCESS
+
+	BIOS or UEFI
+		1 step of linux boot process is BIOS performs integrity checks
+		The BIOS's main goal is to find the system bootloader
+		There is another way to boot up your system instead of using BIOS and that is with UEFI (stands for "Unified extensible firmware interface").
+			windows=UEFI
+			mac=EFI
+	Bootloader
+		Booting into an operating system, it can also be used to boot to non-Linux operating systems
+        Select a kernel to use
+        Specify kernel parameters EX:LILO,	EFILINUX,COREBOOT,SYSLINUX etc.,
+        linux=GRUB
+	kernal
+		Initrd vs Initramfs
+		initrd --> initial ram disk
+		kernal replace the initrd with the actual root filesystem called initramfs.
+		fsck command--> checks for system integrity.
+	init
+		there are 3 implement:
+			1.system v init(sysv)--> start and stop ps. ,based on startup scripts
+			2.Upstart-->uses idea of jobs,event and work on starting jobs.
+			3.Systemd--> new standard for init.
+-------------------------------
+KERNAL
+
+
+	THREE LEVEL in OS
+		hardware
+		kernal
+		userspace
+
+	kernal 
+		memory mangement,handle ps,device communication,system calls,filesystem etc../
+		sudo apt dist-upgrade uprade thhe kernal version
+		sudo apt-get install kernal name (linux-generic-lts-vivid)
+	while we install kernal
+		 vmlinuz - this is the actual linux kernel
+         initrd - the initrd is used as a temporary file system, used before loading the kernel
+         System.map - symbolic lookup table
+         config - kernel configuration settings, if you are compiling your own kernel, you can set which modules can be loaded
+
+     
+      vmlinux is kernel image called in /boot.
+
+    kernal modules
+
+    	lsmod--> list module
+    	sudo modprobe--> load module
+    	sudo modprobe -r --> remove module
+    	/etc/modprobe.d --> load it in boot
+    	
+-------------------------------
+
+system V (init)
+	
+	1.system V
+	2.Upstart
+	3.systemd
+
+system V runlevels:
+init 0-6
+	   0: Shutdown
+       1: Single User Mode
+       2: Multiuser mode without networking
+       3: Multiuser mode with networking
+       4: Unused
+       5: Multiuser mode with networking and GUI
+       6: Reboot
+
+
+system V services
+
+		service --status-all--> list services 
+		service networking start
+		service networking stop
+		service networking restart
+
+upstart services 
+			/usr/share/initctl
+		use initctl to stop,start,restart,emit(manually emit the event)
+
+systemd service
+
+	system V runlevels
+
+		poweroff.target - shutdown system
+        rescue.target - single user mode
+        multi-user.target - multiuser with networking
+        graphical.target - multiuser with networking and GUI
+        reboot.target - restart
+
+     Service units - these are the services we've been starting and stopping, these unit files end in .service
+     Mount units - These mount filesystems, these unit files end in .mount
+     Target units - These group together other units, the files end in .target
+
+     systemctl list-units
+     sudo systemctl start,stop,restart,disable 
+
+     eg:sudo systemctl start networking.service (end with service)
+
+power states:
+
+		sudo shutdown -h now
+		sudo shutdown -h +2(poweroff in 2 minutes)
+		sudo shutdown -r now(restart with shutdown)
+		sudo reboot
+
+-----------------------------
+process utilization
+
+		top
+		iostat(monitor CPU usage as well as monitor disk usage)
+		uptime(cpu monitoring)
+		vmstat(memory monitoring)
+		sar(continuous monitoring(we need to install))
+		lsof . =(list open files)
+		fuser . =(file user) 
+
+process threads
+
+		single-thread(1 ps)
+		multi-thread(1 or more ps)
+
+		ps m -->command
+	    processes are their threads (denoted by  --)
+cron jobs ]
+
+		scheduling tasks
+		crontab -e (to edit cron jobs)
+
+		Minute - (0-59)
+        Hour - (0-23)
+        Day of the month - (1-31)
+        Month - (1-12)
+        Day of the week - (0-7). 0 and 7 are denoted as Sunday
+
+-------------------------------
+
+system logging
+
+
+		services,kernal,deamon send data is actually sent to be saved on your system in the form of logs.
+
+		/var/log/syslog
+		/var/log/rsyslog.d directory
+
+		syslog(send info to system logger)
+		logger command (manually send log message)
+		   /var/log/messages
+		       messages--contains messages like non-critical,non-debug
+		   /var/log/syslog
+		   		logs everything except auth messages
+            /var/log/kern.log
+            	kernal logs
+            /var/log/auth.log
+            	authentication log
+        logrotate tool=manages log files found in /etc/logrotate.d
+
+
+-------------------------------
