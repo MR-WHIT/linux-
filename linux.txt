@@ -14,20 +14,20 @@
 		In  linux every thing is a file.
 
         |-------------------|
-        |      HARDWARE		|
-        |		  ^         |
-        |         |         |
-        |         v         |
-        |	    KERNAL		|
-        |		  ^         |
-        |		  |         |
-        |         v         |
-        |		SHELL		|
+        |      HARDWARE     |
         |         ^         |
         |         |         |
         |         v         |
-        |	 APPLICATION    |
-        |     (SOFTWARE)	|
+        |       KERNAL	    |
+        |         ^         |
+        |         |         |
+        |         v         |
+        |       SHELL	    |
+        |         ^         |
+        |         |         |
+        |         v         |
+        |    APPLICATION    |
+        |     (SOFTWARE)    |
         |___________________|
 
 	stdout(standard output)
