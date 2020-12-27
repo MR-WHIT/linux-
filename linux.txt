@@ -5,7 +5,7 @@
 	linux system 
 			1.hardware--> this includes all hardware that system runs as cpu,disk,memory etc.,
 			2.linux kernal
-				--->kernal is core of os it manages harware interact with system.
+				--->kernal is heart of os it manages harware interact with system.
 			3.user space
 				--> users interact ith system.
 
@@ -38,7 +38,7 @@
 		2>(standard error)
 
 	pipe
-		allow us to get stdout of process anad getout to stdin of another process.
+		allow us to get stdout of process anad getoutput to stdin of another process.
 		ls -la | cat
 	tee
 		like cat command
@@ -96,7 +96,7 @@
 
 	regular expressions
 
-		useful for patterb based selection
+		useful for pattern based selection
 		universal with programming languages.
 		^--begin of a line
 		$--end of line
@@ -214,10 +214,10 @@ sticky bits
 -------------------------------
 
 process 
-
+	program --> set of executable instructions.(Eg:software,application)
 	program that are running in your machine.
 	managed by kernal and each process has it id called PID.
-		init is parrent of all process.
+		init is parent of all process.
 
    PID        TTY     STAT   TIME          CMD
 
@@ -254,7 +254,7 @@ process creation
 
    			 The fork system call creates a mostly identical child process, this child process takes on a new process ID (PID) and the original process becomes its parent process and has something called a parent process ID PPID.
 
-   			 F   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
+F   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
 4  1000    1145    1060  20   0 164088  5300 -      Ssl+ tty2       0:00 /usr/li
 4  1000    1147    1145  20   0 566956 61144 -      Sl+  tty2       0:30 /usr/li
 0  1000    1185    1145  20   0 268796 12980 -      Sl+  tty2       0:00 /usr/li
@@ -284,7 +284,7 @@ jobs control
 priority process (PR) 
 	-19 to 20
 	-19 --> high priority
-	20 --> low priority
+	 20 --> low priority
 
 kill
 
@@ -308,13 +308,13 @@ devices
 
         	ls -l /dev
 
-            brw-rw----   1 root disk      8,   0 Dec 20 20:13 sda
+            brw-rw----   1 root disk       0 Dec 20 20:13 sda
 
-            crw-rw-rw-   1 root root      1,   3 Dec 20 20:13 null
+            crw-rw-rw-   1 root root       3 Dec 20 20:13 null
 
-            srw-rw-rw-   1 root root           0 Dec 20 20:13 log
+            srw-rw-rw-   1 root root       0 Dec 20 20:13 log
 
-            prw-r--r--   1 root root           0 Dec 20 20:13 fdata
+            prw-r--r--   1 root root       0 Dec 20 20:13 fdata
 
 
              	c - character
@@ -325,7 +325,7 @@ devices
                 	character devices --> transfer data one a character at a time
                 	block devices-->data transfer in large fixed-sized blocks
                 	pipe device-->named pipes allow 2 or more process to communicate with each other
-					socket device-->communicate with many ps.
+			socket device-->communicate with many ps.
 
 
 	devices names
@@ -350,7 +350,7 @@ devices
 	lsusb-->list usb devices
 	lspci--> listing pci devices
 	lsscsi--> listing SCSI devices
-    dd command --> useful for conver and copy data.read i/p from file and writes it to a file.
+    dd command --> useful for convert and copy data, read i/p from file and writes it to a file.
     	
     	 dd if=/home/user/backup.img of=/dev/sdb bs=1024(K M G) count=2
 
@@ -364,10 +364,10 @@ devices
  	ext4--> native file system
  	btrfs--> better or buffer FS
  	XFS --> high performance journaling FS
- 	NTFS--> new trchnology FS(windows)
- 	HFS+ --> macintosh FS
+ 	NTFS--> new technology FS(windows)
+ 	HFS+ --> macintosh FS(MAC)
 
-DISk
+DISK
 	 HD divided into partions
 	 		/dev/sda1
 	 		/dev/sda2
@@ -401,7 +401,7 @@ BOOT PROCESS
 	Bootloader
 		Booting into an operating system, it can also be used to boot to non-Linux operating systems
         Select a kernel to use
-        Specify kernel parameters EX:LILO,	EFILINUX,COREBOOT,SYSLINUX etc.,
+        Specify kernel parameters EX:LILO,EFILINUX,COREBOOT,SYSLINUX etc.,
         linux=GRUB
 	kernal
 		Initrd vs Initramfs
@@ -424,13 +424,13 @@ KERNAL
 
 	kernal 
 		memory mangement,handle ps,device communication,system calls,filesystem etc../
-		sudo apt dist-upgrade uprade thhe kernal version
+		sudo apt dist-upgrade upgrade the kernal version
 		sudo apt-get install kernal name (linux-generic-lts-vivid)
 	while we install kernal
 		 vmlinuz - this is the actual linux kernel
          initrd - the initrd is used as a temporary file system, used before loading the kernel
          System.map - symbolic lookup table
-         config - kernel configuration settings, if you are compiling your own kernel, you can set which modules can be loaded
+         config -  ikernel configuration settings,if you are compiling your own kernel, you can set which modules can be loaded
 
      
       vmlinux is kernel image called in /boot.
@@ -452,7 +452,7 @@ system V (init)
 
 system V runlevels:
 init 0-6
-	   0: Shutdown
+       0: Shutdown
        1: Single User Mode
        2: Multiuser mode without networking
        3: Multiuser mode with networking
@@ -469,14 +469,14 @@ system V services
 		service networking restart
 
 upstart services 
-			/usr/share/initctl
+		/usr/share/initctl
 		use initctl to stop,start,restart,emit(manually emit the event)
 
 systemd service
 
 	system V runlevels
 
-		poweroff.target - shutdown system
+	poweroff.target - shutdown system
         rescue.target - single user mode
         multi-user.target - multiuser with networking
         graphical.target - multiuser with networking and GUI
@@ -532,7 +532,7 @@ cron jobs ]
 system logging
 
 
-		services,kernal,deamon send data is actually sent to be saved on your system in the form of logs.
+		services,kernal,daemon send data is actually sent to be saved on your system in the form of logs.
 
 		/var/log/syslog
 		/var/log/rsyslog.d directory
