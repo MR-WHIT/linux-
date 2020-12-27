@@ -8,8 +8,6 @@
 ├── dev
 ├── etc
 ├── home
-├── initrd.img -> boot/initrd.img-5.7.0-kali1-amd64
-├── initrd.img.old -> boot/initrd.img-5.7.0-kali1-amd64
 ├── lib -> usr/lib
 ├── lib32 -> usr/lib32
 ├── lib64 -> usr/lib64
@@ -27,11 +25,6 @@
 ├── tmp
 ├── usr
 ├── var
-├── vmlinuz -> boot/vmlinuz-5.7.0-kali1-amd64
-└── vmlinuz.old -> boot/vmlinuz-5.7.0-kali1-amd64
-
-22 directories, 4 files
-
 
 	/
 	|
