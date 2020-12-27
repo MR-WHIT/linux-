@@ -34,7 +34,7 @@
 		; --> not check 1st comand run 2nd comand 
 		[10>5] --> test case
 			
-	seebank
+	shebang
 		binary location  
 		#!/usr/bin/bash
 		
@@ -54,9 +54,9 @@
 		b=3
 		if[$a =$b]
 		then
-			echo "a is greate"
+			echo "a is greater"
 		else
-			echo "b is great"
+			echo "b is greater"
 			
 	fi
 	
